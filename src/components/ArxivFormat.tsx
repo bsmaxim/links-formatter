@@ -1,16 +1,8 @@
 import { memo, useEffect, useState } from "react";
 import { Input } from "./Input";
-import "./ArxivFormat.css"
+import { formatAuthors, formatDate } from "../utils/utils";
 
-interface ArxivFormatProps {
-
-}
-
-function formatDate(date: Date): string {
-  const day = date.getDate().toString().padStart(2, '0')
-  const month = (date.getMonth() + 1).toString().padStart(2, '0')
-  return `${day}.${month}.${date.getFullYear()}`
-}
+interface ArxivFormatProps {}
 
 export const ArxivFormat = memo((props: ArxivFormatProps) => {
   const {} = props;
@@ -23,24 +15,15 @@ export const ArxivFormat = memo((props: ArxivFormatProps) => {
   const [result, setResult] = useState<string>();
 
   useEffect(() => {
-    const formattedAuthors = authors
-      ?.split(", ")
-      .map((author) => {
-        const splitted = author.split(" ")
-        const surname = splitted[splitted.length - 1]
-        const name = splitted.slice(0, splitted.length-1).join(" ")
-        // console.log(author.split(" "))
-        return `${surname} ${name[0]}.`;
-      })
-      .join(", ");
+    const formattedAuthors = formatAuthors(authors);
 
     const formattedUpdateDate: Date = new Date(updateDate);
     const updateDateString = formatDate(formattedUpdateDate);
-    console.log(formattedUpdateDate, updateDateString)
+
     const formattedApplicationDate: Date = new Date(applicationDate);
     const appliactionDateString = formatDate(formattedApplicationDate);
 
-    const newResult = `${formattedAuthors} ${title} [Электронный ресурс] // arXiv.org ${formattedUpdateDate.getFullYear()}. Дата обновления: ${updateDateString}. URL: ${url} (дата обращения ${appliactionDateString})`;
+    const newResult = `${formattedAuthors} ${title} [Электронный ресурс] // arXiv.org ${formattedUpdateDate.getFullYear()}. Дата обновления: ${updateDateString}. URL: ${url} (дата обращения ${appliactionDateString}).`;
     setResult(newResult);
   }, [authors, title, updateDate, applicationDate]);
 
