@@ -23,7 +23,7 @@ export const ArxivFormat = memo((props: ArxivFormatProps) => {
     const formattedApplicationDate: Date = new Date(applicationDate);
     const appliactionDateString = formatDate(formattedApplicationDate);
 
-    const newResult = `${formattedAuthors} ${title} [Электронный ресурс] // arXiv.org ${formattedUpdateDate.getFullYear()}. Дата обновления: ${updateDateString}. URL: ${url} (дата обращения ${appliactionDateString}).`;
+    const newResult = `${formattedAuthors} ${title} [Электронный ресурс] // arXiv.org ${formattedUpdateDate.getFullYear()}. Дата обновления: ${updateDateString}. URL: ${url} (дата обращения ${appliactionDateString} г.).`;
     setResult(newResult);
   }, [authors, title, updateDate, applicationDate]);
 

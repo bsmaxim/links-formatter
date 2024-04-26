@@ -13,7 +13,7 @@ export const ElectroResourceFormat = () => {
     const formattedApplicationDate: Date = new Date(applicationDate);
     const appliactionDateString = formatDate(formattedApplicationDate);
 
-    const newResult = `${title} [Электронный ресурс] URL: ${url} (дата обращения ${appliactionDateString}).`;
+    const newResult = `${title} [Электронный ресурс] URL: ${url} (дата обращения ${appliactionDateString} г.).`;
     setResult(newResult);
   }, [title, url, applicationDate]);
 
